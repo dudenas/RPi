@@ -10,4 +10,4 @@ def greet(who_to_greet):
 
 
 print(greet('Min'))
-print(greet('murama'))
+print(greet('new'))

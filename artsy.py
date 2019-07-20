@@ -1,12 +1,17 @@
 import picamera
+import os
 from time import sleep
 from datetime import datetime, timedelta
 
-# setup the camera such that it closes
-# when we are done with it
-
 # directory
-directory = '/home/pi/Desktop/RPI/images/'
+directory = '/home/pi/Desktop/tests/' + datetime.now().strftime('%m%d') + '/'
+
+# variables
+# time to wait for a new photo to be taken in seconds
+timeToWait = 15
+# hour to start and to finish the command
+timeToStart = 4
+timeToEnd = 23
 
 print('About to take some artsy pictures')
 
@@ -17,36 +22,35 @@ def currentTime():
     return picTime
 
 
-def startTime():
-    startTime = datetime.now().strftime('%S')
-    return int(startTime)
+with picamera.PiCamera() as camera:
+    # flips the camera based on the position
+    camera.resolution = (1280, 720)
+    camera.vflip = False
+    camera.hflip = False
 
-# with picamera.PiCamera() as camera:
-#     # take time to warm up the camera
-#     camera.resolution = (1280, 720)
-#     camera.vflip = True
-#     camera.hflip = True
+    camera.start_preview()
+    frameCount = 0
+    # waits for the start hour
+    while int(datetime.now().strftime('%H')) != timeToStart:
+        pass
+        # print(datetime.now().strftime('%H'))
 
-#     camera.start_preview()
-#     frameCount = 0
-#     running = False
-#     start = True
+    print('It\'s time, it\'s time, it\'s time to make some frekin art')
+    # create a new directory if it does not exist
+    if not os.path.exists(directory):
+        os.mkdir(directory)
+        print("Directory ", directory,  " Created ")
+    else:
+        print("Directory ", directory,  " already exists")
 
-#     # check start time
-#     while start:
-#         if startTime() == 0:
-#             print(startTime())
-#             start = False
-#             running = True
-#     print('It\'s time to take some pictures')
-
-#     # capture loop
-#     while running:
-#         # camera.capture(filename)
-#         filename = directory + 'art-' + currentTime() + '-' + str(frameCount) + '.jpg'
-#         camera.capture(filename)
-#         frameCount += 1
-#         print(filename)
-#         sleep(5)
-#     camera.close()
-# print('Pictures were taken, goodbye')
+    # capture loop
+    # stops at the end hour
+    while int(datetime.now().strftime('%H')) != timeToEnd:
+        filename = directory + 'art-' + currentTime() + '-' + str(frameCount) + '.jpg'
+        camera.capture(filename)
+        frameCount += 1
+        # print(datetime.now().strftime('%S'), frameCount)
+        # print(frameCount)
+        sleep(timeToWait)
+    camera.close()
+print('art is done, go home')
