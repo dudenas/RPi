@@ -27,19 +27,10 @@ def currentTime():
 
 with picamera.PiCamera() as camera:
     # flips the camera based on the position
-    camera.resolution = (1920, 1080)
+    camera.resolution = (1280, 720)
     camera.vflip = False
     camera.hflip = False
-    # Wait for the automatic gain control to settle
-    sleep(2)
-    # set the values
-    camera.shutter_speed = camera.exposure_speed
-    camera.exposure_mode = 'off'
-    g = camera.awb_gains
-    camera.awb_mode = 'off'
-    camera.awb_gains = g
-
-    # start previe
+    # start preview
     camera.start_preview()
     # waits for the start hour
     while int(datetime.now().strftime('%H')) != timeToStart:
@@ -62,10 +53,6 @@ with picamera.PiCamera() as camera:
         filename = directory + 'art-' + currentTime() + '-' + str(frameCount) + '.jpg'
         camera.capture(filename)
         frameCount += 1
-        # print(datetime.now().strftime('%S'), frameCount)
-        camera.shutter_speed = camera.exposure_speed
-        g = camera.awb_gains
-        camera.awb_gains = g
         sleep(timeToWait)
     camera.close()
 print('art is done, go home')
