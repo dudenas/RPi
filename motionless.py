@@ -47,7 +47,7 @@ with picamera.PiCamera() as camera:
     print("Directory ", directory,  " is Created")
 
     # capture loop
-    # stops at the end hour
+    # never freakin stops
     while True:
         filename = directory + 'art-' + currentTime() + '-' + str(frameCount) + '.jpg'
         camera.capture(filename)
