@@ -8,18 +8,12 @@ directory = ''
 
 # variables
 # time to wait for a new photo to be taken in seconds
-timeToWait = 15
+timeToWait = 5
 
 # other values
 frameCount = 0
 
 print('About to take some artsy pictures')
-
-
-def currentTime():
-    ct = datetime.now()
-    picTime = ct.strftime('%m%d-%H%M%S')
-    return picTime
 
 
 with picamera.PiCamera() as camera:
@@ -33,23 +27,29 @@ with picamera.PiCamera() as camera:
     sleep(2)
 
     print('It\'s time, it\'s time, it\'s time to make some frekin art')
-    # set the directory name after the waiting is done
     counter = 0
-    directory = '/home/pi/Desktop/tests/' + datetime.now().strftime('%m%d') + \
+    # check if the images folder is, if not create one
+    if not os.path.exists('/home/pi/Desktop/tests/images/'):
+        os.mkdir('/home/pi/Desktop/tests/images/')
+        print("Directory is Created ")
+    else:
+        print("Directory already exists")
+    # set the directory name after the waiting is done
+    directory = '/home/pi/Desktop/tests/images/' + datetime.now().strftime('%m%d') + \
         '_' + str(counter) + '/'
     # check if the directory exists
     while os.path.exists(directory):
         counter += 1
-        directory = '/home/pi/Desktop/tests/' + datetime.now().strftime('%m%d') + \
+        directory = '/home/pi/Desktop/tests/images/' + datetime.now().strftime('%m%d') + \
             '_' + str(counter) + '/'
     # create a new directory
     os.mkdir(directory)
-    print("Directory ", directory,  " is Created")
+    print("Directory ", directory, " is Created")
 
     # capture loop
     # never freakin stops
     while True:
-        filename = directory + 'art-' + currentTime() + '-' + str(frameCount) + '.jpg'
+        filename = directory + 'art' + str(frameCount) + '.jpg'
         camera.capture(filename)
         frameCount += 1
         sleep(timeToWait)
