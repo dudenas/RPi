@@ -9,8 +9,7 @@ directory = ''
 
 # variables
 # time to wait for a new photo to be taken in seconds
-timeToWait = 5
-timeToEnd = 10
+timeToWait = 1
 
 # other values
 frameCount = 0
@@ -50,13 +49,9 @@ with picamera.PiCamera() as camera:
 
     # capture loop
     # never freakin stops
-    while int(datetime.now().strftime('%H')) != timeToEnd:
+    while True:
         filename = directory + 'art' + str(frameCount) + '.jpg'
         camera.capture(filename)
         frameCount += 1
         sleep(timeToWait)
-    # close camera
-    camera.close()
-    # shutdown the system to save the battery
-    os.system("sudo shutdown -h now")
 print('art is done, go home')
