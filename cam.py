@@ -16,6 +16,7 @@ with picamera.PiCamera() as camera:
     camera.resolution = (1280, 720)
     camera.vflip = False
     camera.hflip = False
+    print('test')
     # waits for the camera to warm up
 
     print('It\'s time, it\'s time, it\'s time to make some frekin art')
