@@ -9,6 +9,7 @@ directory = ''
 
 # variables
 print('About to take some artsy pictures')
+print('About to take some artsy pictures')
 
 
 with picamera.PiCamera() as camera:
