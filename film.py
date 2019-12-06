@@ -31,12 +31,8 @@ with picamera.PiCamera() as camera:
 
     # show video
     camera.start_preview()
-
-    # start recording
     camera.start_recording(name + ".h264")
-
-    # end recording
-    # camera.stop_recording()
-    # print("saved")
-    # camera.stop_preview()
+    while True:
+        print(datetime.now().strftime('%m%d%H%M%S'))
+        sleep(60)
 print('art is done, go home')
