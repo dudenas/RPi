@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 import sys
 
 # directory
-directory = '/home/pi/Desktop/readyPaint/video/'
-timePerVideo = 20 * 30
+directory = '/home/pi/Desktop/rec/'
+print("test")
 
 # variables
 print('About to take some artsy video')
@@ -26,13 +26,17 @@ with picamera.PiCamera() as camera:
         print("Directory is Created ")
     else:
         print("Directory already exists")
-    # set the directory name after the waiting is done
-    i = 0
-    while True:
-        name = directory + datetime.now().strftime('%m%d%H%M')
-        camera.start_recording(name + ".h264")
-        sleep(timePerVideo * 1)
-        camera.stop_recording()
-        print(i)
-        i += 1
+    # set the name
+    name = directory + datetime.now().strftime('%m%d%H%M')
+
+    # show video
+    camera.start_preview()
+
+    # start recording
+    camera.start_recording(name + ".h264")
+
+    # end recording
+    # camera.stop_recording()
+    # print("saved")
+    # camera.stop_preview()
 print('art is done, go home')
