@@ -5,10 +5,10 @@ print(sys.executable)
 
 
 def greet(who_to_greet):
-    greeting = "Hello, {}".format(who_to_greet)
+    greeting = (f"Hi, {who_to_greet}!")
     return greeting
 
 
-print(greet('Min'))
-print(greet('new'))
-print(greet('test'))
+print(greet('is'))
+print(greet('it'))
+print(greet('new?'))
