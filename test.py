@@ -9,6 +9,7 @@ def greet(who_to_greet):
     return greeting
 
 
+print(greet('what'))
 print(greet('is'))
 print(greet('it'))
 print(greet('new?'))
