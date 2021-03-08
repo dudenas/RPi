@@ -123,4 +123,4 @@ if __name__ == '__main__':
         if args.clear:
             colorWipe(strip, Color(0, 0, 0), 10)
 
-print("test")
+print("test2")
