@@ -84,15 +84,15 @@ try:
     GPIO_ECHO_1 = 23
     setGPIOpins(GPIO_TRIGGER_1, GPIO_ECHO_1)
 
-    # GPIO_TRIGGER_2 = 17
-    # GPIO_ECHO_2 = 18
-    # setGPIOpins(GPIO_TRIGGER_2, GPIO_ECHO_2)
+    GPIO_TRIGGER_2 = 24
+    GPIO_ECHO_2 = 25
+    setGPIOpins(GPIO_TRIGGER_2, GPIO_ECHO_2)
 
     while True:
         distance_1 = measure_average(GPIO_TRIGGER_1, GPIO_ECHO_1)
-        # distance_2 = measure_average(GPIO_TRIGGER_2, GPIO_ECHO_2)
-        # print(f"Distance-1 : {distance_1:.1f} | Distance-2 : {distance_2:.1f}")
-        print(f"Distance-1 : {distance_1:.1f}")
+        distance_2 = measure_average(GPIO_TRIGGER_2, GPIO_ECHO_2)
+        print(f"Distance-1 : {distance_1:.1f} | Distance-2 : {distance_2:.1f}")
+        # print(f"Distance-1 : {distance_1:.1f}")
         time.sleep(1)
 
 except KeyboardInterrupt:
