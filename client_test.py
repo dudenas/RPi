@@ -1,0 +1,28 @@
+#
+#   Hello World client in Python
+#   Connects REQ socket to tcp://localhost:5555
+#   Sends "Hello" to server, expects "World" back
+#
+
+import zmq
+
+context = zmq.Context()
+
+#  Socket to talk to server
+print("Connecting to hello world server…")
+socket = context.socket(zmq.REQ)
+socket.connect("tcp://localhost:5555")
+
+#  Do 10 requests, waiting each time for a response
+for request in range(10):
+    print(f"Sending request {request} …")
+    socket.send(bytes(f"{request}", 'utf8'))
+
+    #  Get the reply.
+    message = socket.recv()
+
+    strings = str(message, 'utf8')
+    # get the num
+    num = int(strings)
+
+    print(f"Received reply {request} [ {num} ]")
